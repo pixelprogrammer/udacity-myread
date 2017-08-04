@@ -44,6 +44,7 @@ To simplify your development process, we've provided a backend server for you to
 * shelf: `<String>` contains one of ["wantToRead", "currentlyReading", "read"]  
 * Returns a Promise which resolves to a JSON object containing the response data of the POST request
 
+
 ### `search(query, maxResults)`
 * query: `<String>`
 * maxResults: `<Integer>` Due to the nature of the backend server, search results are capped at 20, even if this is set higher.
