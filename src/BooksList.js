@@ -14,20 +14,26 @@ class BooksList extends Component {
 								<div className="book-top">
 									<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
 									<div className="book-shelf-changer">
-										<select onChange={(event) => {
+										<select value={typeof book.shelf != 'undefined' ? book.shelf : 'none'} onChange={(event) => {
 											const shelf = event.currentTarget.value;
 											this.props.moveBook(book, shelf);
 										}}>
 											<option value="none" disabled>Move to...</option>
-											<option value="currentlyReading" >Currently Reading</option>
-											<option value="wantToRead">Want to Read</option>
-											<option value="read">Read</option>
+											{this.props.labels.map(shelf => (
+
+												<option key={shelf.slug} value={shelf.slug}>{shelf.label}</option>
+											))}
 											<option value="none">None</option>
 										</select>
 									</div>
 								</div>
 								<div className="book-title">{book.title}</div>
-								<div className="book-authors">{book.authors.map((author) => {author})}</div>
+								{typeof book.authors != 'undefined' && (
+									<div className="book-authors">{book.authors.map((author) => (
+										<div key={book.id + "-" + author}>{author}</div>
+										)
+									)}</div>
+								)}
 							</div>
 						</li>
 					))

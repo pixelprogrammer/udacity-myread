@@ -4,27 +4,29 @@ import PropTypes from 'prop-types'
 import BooksList from './BooksList'
 import * as BooksAPI from './BooksAPI'
 
-class BookSearch extends Component {
-	state = {
-		books: [],
-	}
+let query = '';
 
-	// componentDidMount() {
-	// 	BooksAPI.search("", 20).then(data => {
-	// 		console.log(data);
-	// 		// this.setState({books: data});
-	// 	});
-	// }
+class BookSearch extends Component {
 
 	onSearch = (event) => {
 
 		console.log(event.currentTarget.value);
-		const query = event.currentTarget.value;
+		query = event.currentTarget.value;
 
-		BooksAPI.search(query, 20).then(data => {
-			console.log(data);
-			this.setState({books:data})
-		});
+		console.log(this.props);
+
+		this.props.onSearch(query);
+		
+	}
+
+	onMoveBook = (book, shelf) => {
+		BooksAPI.update(book, shelf).then(data => {
+			console.log('searched books moved');
+			// let newBooks = this.props.searchedBooks.filter(book => )
+			return BooksAPI.search(query, 20);
+		}).then(data => {
+			this.props.onMoveBook({searchedBooks: data})
+		})
 	}
 	render() {
 		return (
@@ -40,12 +42,12 @@ class BookSearch extends Component {
 							However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
 							you don't find a specific author or title. Every search is limited by search terms.
 						*/}
-						<input type="text" placeholder="Search by title or author" onInput={this.onSearch}/>
+						<input type="text" placeholder="Search by title or author" value={this.props.query} onInput={this.onSearch}/>
 						
 					</div>
 				</div>
 				<div className="search-books-results">
-					<BooksList books={this.state.books}/>
+					<BooksList books={this.props.books} moveBook={this.onMoveBook} labels={this.props.labels} />
 				</div>
 			</div>
 		)
