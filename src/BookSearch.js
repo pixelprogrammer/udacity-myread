@@ -1,33 +1,61 @@
-import React, {Component} from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import BooksComponent from './BooksComponent'
 import BooksList from './BooksList'
-import * as BooksAPI from './BooksAPI'
+// import * as BooksAPI from './BooksAPI'
 
 let query = '';
 
-class BookSearch extends Component {
+class BookSearch extends BooksComponent {
+
+	static propTypes = {
+		books: PropTypes.array.isRequired,
+		onMoveBook: PropTypes.func.isRequired,
+		onSearch: PropTypes.func.isRequired,
+	}
 
 	onSearch = (event) => {
 
-		console.log(event.currentTarget.value);
 		query = event.currentTarget.value;
-
-		console.log(this.props);
-
 		this.props.onSearch(query);
 		
 	}
 
-	onMoveBook = (book, shelf) => {
-		BooksAPI.update(book, shelf).then(data => {
-			console.log('searched books moved');
-			// let newBooks = this.props.searchedBooks.filter(book => )
-			return BooksAPI.search(query, 20);
-		}).then(data => {
-			this.props.onMoveBook({searchedBooks: data})
-		})
-	}
+	// onMoveBook = (book, shelf) => {
+	// 	BooksAPI.update(book, shelf).then(data => {
+	// 		console.log('searched books moved');
+	// 		console.log(data);
+
+	// 		// let newBooks = this.props.books.map(b => {
+				
+	// 		// 	if(b.id === book.id) {
+	// 		// 		b.shelf = shelf;
+	// 		// 	}
+
+	// 		// 	return b;
+	// 		// });
+	// 		// this.props.onMoveBook({searchedBooks: newBooks});
+
+
+	// 		const index = data[shelf].findIndex(id => {
+	// 			return id === book.id;
+	// 		});
+
+	// 		if( index >= 0 ) {
+	// 			this.props.onMoveBook(book, shelf);
+	// 			return;
+	// 		}
+
+	// 		// return BooksAPI.search(query, 20);
+	// 	});
+	// 	// 	.then(data => {
+	// 	// 	if( typeof data === 'Array' && data.length > 0 ) {
+
+	// 	// 	}
+	// 	// 	this.props.onMoveBook({searchedBooks: data})
+	// 	// })
+	// }
 	render() {
 		return (
 			<div className="search-books">

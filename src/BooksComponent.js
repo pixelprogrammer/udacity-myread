@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import {Component} from 'react'
 import * as BooksAPI from './BooksAPI'
 
 class BooksComponent extends Component {
@@ -7,32 +7,21 @@ class BooksComponent extends Component {
 		BooksAPI.update(book, shelf).then(data => {
 			console.log("Moving book");
 			console.log(data);
-			let books = {};
+			let index = -1;
 
-			// for(let shelf in data) {
-			// 	console.log("Shelf: " + shelf);
-			// 	books[shelf] = [];
+			// check if found
+			if( shelf in data ) {
+				index = data[shelf].findIndex(id => {
+					return id === book.id;
+				});
+			}
 
-			// 	if( data[shelf].length == 0 ) {
-			// 		continue;
-			// 	}
+			if( index >= 0 || shelf === "none") { // a successful transfer
+				this.props.onMoveBook(book, shelf);
+				return;
+			}
 
-			// 	// data[shelf].map(id => {
-			// 	// 	BooksAPI.get(id).then(book => {
-			// 	// 		console.log('this is a book');
-			// 	// 		console.log(book);
-			// 	// 		books[shelf].push(book);
-			// 	// 	});
-			// 	// });
-
-
-			// }
-			
-			// TODO: filter the books and then 
-			BooksAPI.getAll().then(data => {
-
-				this.props.onMoveBook({myBooks: data})
-			})
+			// maybe some error handling here in case the book did not move
 
 		});
 	}

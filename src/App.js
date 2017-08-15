@@ -21,34 +21,61 @@ class BooksApp extends React.Component {
 
 	componentDidMount() {
 		BooksAPI.getAll().then(data=> {
-
-			// const cr = data.filter(book => book.shelf === 'currentlyReading');
-			// const wr = data.filter(book => book.shelf === 'wantToRead');
-			// const r = data.filter(book => book.shelf === 'read');
 			this.setState({myBooks: data});
 		});
 	}
 
-	// TODO: Update book in search results to new shelf category
-	onMovedBook = (updatedState) => {
-		console.log("Updating the books state");
-		console.log(updatedState);
-		this.setState(updatedState);
+	// onMovedBook = (updatedState) => {
+	// 	console.log("Updating the books state");
+	// 	console.log(updatedState);
+	// 	this.setState(updatedState);
+	// }
+
+	onMovedBook = (book, shelf) => {
+		// update book in both myBooks and searchedBooks
+		console.log('OnMove from app');
+
+		let myBooks = this.state.myBooks.filter(b => b.id !== book.id)
+		book.shelf = shelf;
+
+		myBooks.push(book);
+
+		let searchedBooks = this.state.searchedBooks;
+
+		console.log(myBooks);
+
+		this.setState({
+			myBooks: myBooks,
+			searchedBooks: searchedBooks
+		});
+
 	}
 
 	onSearch = (query) => {
+		console.log('onSearch from app');
+
 		if( query === '' ) {
 			return;
 		}
 
 		BooksAPI.search(query, 20).then(data => {
+
+			console.log('search query data:');
+			console.log(data);
+			let books = [];
+
+			if( "error" in data ) {
+				console.log("No results found");
+				this.setState({searchedBooks: books});
+				return;
+			}
 			// add my categories to the books so I can
 			// add UI that shows whats on my shelves
-			data.map(book => {
+			books = data.map(book => {
 				
 				for(let i=0; i < this.state.myBooks.length; i++) {
 					
-					if(this.state.myBooks[i].id == book.id) {
+					if(this.state.myBooks[i].id === book.id) {
 						book.shelf = this.state.myBooks[i].shelf;
 					}
 					
@@ -56,7 +83,7 @@ class BooksApp extends React.Component {
 				return book;
 			})
 
-			this.setState({searchedBooks: data})
+			this.setState({searchedBooks: books})
 			
 		});
 	}

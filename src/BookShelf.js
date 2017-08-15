@@ -1,43 +1,37 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom'
+import BooksComponent from './BooksComponent'
 import BooksList from './BooksList'
-import * as BooksAPI from './BooksAPI'
+// import * as BooksAPI from './BooksAPI'
 
-class BookShelf extends Component {
+class BookShelf extends BooksComponent {
 
-	onMoveBook = (book, shelf) => {
-		BooksAPI.update(book, shelf).then(data => {
-			console.log("Moving book");
-			console.log(data);
-			let books = {};
+	// onMoveBook = (book, shelf) => {
+	// 	BooksAPI.update(book, shelf).then(data => {
+	// 		console.log("Moving book");
+	// 		console.log(data);
 
-			// for(let shelf in data) {
-			// 	console.log("Shelf: " + shelf);
-			// 	books[shelf] = [];
+	// 		// check if found
+	// 		const index = data[shelf].findIndex(id => {
+	// 			return id === book.id;
+	// 		});
 
-			// 	if( data[shelf].length == 0 ) {
-			// 		continue;
-			// 	}
+	// 		if( index >= 0 || shelf === "none") { // a successful transfer
+	// 			this.props.onMoveBook(book, shelf);
+	// 			return;
+	// 		}
 
-			// 	// data[shelf].map(id => {
-			// 	// 	BooksAPI.get(id).then(book => {
-			// 	// 		console.log('this is a book');
-			// 	// 		console.log(book);
-			// 	// 		books[shelf].push(book);
-			// 	// 	});
-			// 	// });
+	// 		// maybe some error handling here in case the book did not move
 
 
-			// }
-			
-			BooksAPI.getAll().then(data => {
+	// 		// BooksAPI.getAll().then(data => {
 
-				this.props.onMoveBook({myBooks: data})
-			})
+	// 		// 	this.props.onMoveBook({myBooks: data})
+	// 		// })
 
-			// this.setState({books:data});
-		});
-	}
+	// 		// this.setState({books:data});
+	// 	});
+	// }
 	render() {
 		console.log('Book Shelf rendered');
 		return (
