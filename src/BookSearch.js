@@ -13,6 +13,7 @@ class BookSearch extends BooksComponent {
 		books: PropTypes.array.isRequired,
 		onMoveBook: PropTypes.func.isRequired,
 		onSearch: PropTypes.func.isRequired,
+		labels: PropTypes.array.isRequired,
 	}
 
 	onSearch = (event) => {

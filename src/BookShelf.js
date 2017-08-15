@@ -1,10 +1,17 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types'
 import BooksComponent from './BooksComponent'
 import BooksList from './BooksList'
 // import * as BooksAPI from './BooksAPI'
 
 class BookShelf extends BooksComponent {
+	
+	static propTypes = {
+		books: PropTypes.array.isRequired,
+		onMoveBook: PropTypes.func.isRequired,
+		labels: PropTypes.array.isRequired,
+	}
 
 	// onMoveBook = (book, shelf) => {
 	// 	BooksAPI.update(book, shelf).then(data => {
