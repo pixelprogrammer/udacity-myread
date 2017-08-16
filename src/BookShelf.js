@@ -13,34 +13,7 @@ class BookShelf extends BooksComponent {
 		labels: PropTypes.array.isRequired,
 	}
 
-	// onMoveBook = (book, shelf) => {
-	// 	BooksAPI.update(book, shelf).then(data => {
-	// 		console.log("Moving book");
-	// 		console.log(data);
-
-	// 		// check if found
-	// 		const index = data[shelf].findIndex(id => {
-	// 			return id === book.id;
-	// 		});
-
-	// 		if( index >= 0 || shelf === "none") { // a successful transfer
-	// 			this.props.onMoveBook(book, shelf);
-	// 			return;
-	// 		}
-
-	// 		// maybe some error handling here in case the book did not move
-
-
-	// 		// BooksAPI.getAll().then(data => {
-
-	// 		// 	this.props.onMoveBook({myBooks: data})
-	// 		// })
-
-	// 		// this.setState({books:data});
-	// 	});
-	// }
 	render() {
-		console.log('Book Shelf rendered');
 		return (
 			<div className="list-books">
 				<div className="list-books-title">

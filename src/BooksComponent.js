@@ -5,8 +5,6 @@ class BooksComponent extends Component {
 	
 	onMoveBook = (book, shelf) => {
 		BooksAPI.update(book, shelf).then(data => {
-			console.log("Moving book");
-			console.log(data);
 			let index = -1;
 
 			// check if found
@@ -21,7 +19,7 @@ class BooksComponent extends Component {
 				return;
 			}
 
-			// maybe some error handling here in case the book did not move
+			// TODO: Error handling for a book that may not have moved
 
 		});
 	}

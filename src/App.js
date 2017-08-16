@@ -25,15 +25,8 @@ class BooksApp extends React.Component {
 		});
 	}
 
-	// onMovedBook = (updatedState) => {
-	// 	console.log("Updating the books state");
-	// 	console.log(updatedState);
-	// 	this.setState(updatedState);
-	// }
-
 	onMovedBook = (book, shelf) => {
 		// update book in both myBooks and searchedBooks
-		console.log('OnMove from app');
 
 		let myBooks = this.state.myBooks.filter(b => b.id !== book.id)
 		book.shelf = shelf;
@@ -42,7 +35,6 @@ class BooksApp extends React.Component {
 
 		let searchedBooks = this.state.searchedBooks;
 
-		console.log(myBooks);
 
 		this.setState({
 			myBooks: myBooks,
@@ -52,7 +44,6 @@ class BooksApp extends React.Component {
 	}
 
 	onSearch = (query) => {
-		console.log('onSearch from app');
 
 		if( query === '' ) {
 			return;
@@ -60,12 +51,9 @@ class BooksApp extends React.Component {
 
 		BooksAPI.search(query, 20).then(data => {
 
-			console.log('search query data:');
-			console.log(data);
 			let books = [];
 
 			if( "error" in data ) {
-				console.log("No results found");
 				this.setState({searchedBooks: books});
 				return;
 			}
