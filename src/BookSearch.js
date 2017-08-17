@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import BooksComponent from './BooksComponent'
 import BooksList from './BooksList'
-// import * as BooksAPI from './BooksAPI'
 
 let query = '';
 
