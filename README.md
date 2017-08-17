@@ -1,8 +1,22 @@
-# SETUP GUIDE
+# INSTALLATION GUIDE
 
-In order to start the app server you will need to run `npm start` or `yarn start` (depending on which program you use) within the project folder.
+First clone the repo
 
-A new browser window should open in your default browser and launch the app if done successfully.
+`git clone git@github.com:pixelprogrammer/udacity-myread.git`
+
+cd into the directory and install the node modules:
+
+`npm install`
+
+or if you have yarn installed:
+
+`yarn install`
+
+To start the server for development run:
+
+`npm start` or `yarn start`
+
+A new browser window should open in your default browser and launch the app if successful.
 
 ## SETUP FOR PRODUCTION
 
